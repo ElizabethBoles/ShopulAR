@@ -24,15 +24,20 @@
         <td ng-show={{item.discount}}><img src='saletag.png'></td>
       </tr>
     </table>
-    <form   name='addItem'
-    ng-submit='addItem.$valid && iCtrl.addItem(iCtrl.newItem)'
-    novalidate>
+    <form name='addItem'ng-submit='addItem.$valid && iCtrl.addItem(iCtrl.newItem)'novalidate>
     <!--I've created a new item object which now in these input fields i am putting data into that obj-->
-    <input type='text' placeholder='Name' ng-model='iCtrl.newItem.name' required ng-model='movieCtrl.newMovie.title'>
-    <input type='text' placeholder='Price' ng-model='iCtrl.newItem.price'>
-    <input type='text' placeholder='Quantity' ng-model='iCtrl.newItem.quantity'>
-    <input type='text' placeholder='Color' ng-model='iCtrl.newItem.color'>
-    <input type='text' placeholder='Discount' ng-model='iCtrl.newItem.discount'>
+    <p ng-show='addItem.name.$touched && !addItem.name.$valid || !addItem.item.$valid && addItem.$submitted'>Item required</p>
+    <p ng-show='addItem.price.$touched && !addItem.price.$valid || !addItem.item.$valid && addItem.$submitted'>Price required</p>
+    <p ng-show='addItem.quantity.$touched && !addItem.quantity.$valid || !addItem.item.$valid && addItem.$submitted'>Quantity required</p>
+    <p ng-show='addItem.color.$touched && !addItem.color.$valid || !addItem.item.$valid && addItem.$submitted'>Color required</p>
+    <p ng-show='addItem.discount.$touched && !addItem.discount.$valid || !addItem.item.$valid && addItem.$submitted'>Discount required</p>
+
+
+    <input type='text' placeholder='Name' name='name' ng-model='iCtrl.newItem.name' required>
+    <input type='text' placeholder='Price' name='price' ng-model='iCtrl.newItem.price' required>
+    <input type='text' placeholder='Quantity' name='quantity' ng-model='iCtrl.newItem.quantity' required>
+    <input type='text' placeholder='Color' name='color' ng-model='iCtrl.newItem.color' required>
+    <input type='text' placeholder='Discount' name='discount' ng-model='iCtrl.newItem.discount' required>
     <input type='submit' value='Add item'>
   </form>
 
