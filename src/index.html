@@ -10,13 +10,13 @@
   <main ng-controller='ShopController as iCtrl' class='table-striped col-lg-8'>
     <table>
       <tr>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Quantity</th>
+        <th ng-click='iCtrl.sort("name")'>Name</th>
+        <th ng-click='iCtrl.sort("price")'>Price</th>
+        <th ng-click='iCtrl.sort("quantity")'>Quantity</th>
         <th>Color</th>
       </tr>
 
-      <tr ng-repeat='item in iCtrl.items'>
+      <tr ng-repeat='item in iCtrl.items | orderBy:iCtrl.sortBy'>
         <td>{{item.name}}</td>
         <td>{{iCtrl.itemPrice(item) | currency:"USD $"}}</td>
         <td>{{item.quantity}}</td>
@@ -24,14 +24,27 @@
         <td ng-show={{item.discount}}><img src='saletag.png'></td>
       </tr>
     </table>
-  </main>
-  <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js'></script>
-  <script src='/js/shop.module.js'></script>
-  <script src='/js/shop.controller.js'></script>
+    <form   name='addItem'
+    ng-submit='addItem.$valid && iCtrl.addItem(iCtrl.newItem)'
+    novalidate>
+    <!--I've created a new item object which now in these input fields i am putting data into that obj-->
+    <input type='text' placeholder='Name' ng-model='iCtrl.newItem.name' required ng-model='movieCtrl.newMovie.title'>
+    <input type='text' placeholder='Price' ng-model='iCtrl.newItem.price'>
+    <input type='text' placeholder='Quantity' ng-model='iCtrl.newItem.quantity'>
+    <input type='text' placeholder='Color' ng-model='iCtrl.newItem.color'>
+    <input type='text' placeholder='Discount' ng-model='iCtrl.newItem.discount'>
+    <input type='submit' value='Add item'>
+  </form>
 
+</main>
+<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js'></script>
+<script src='/src/js/shop.module.js'></script>
+<script src='/src/js/shop.controller.js'></script>
+<script src='/src/js/shop.service.js'></script>
+
+<footer>
+  <p>Thanks for shopping!</p>
   <footer>
-    <p>Thanks for shopping!</p>
-    <footer>
 
-    </body>
-    </html>
+  </body>
+  </html>
