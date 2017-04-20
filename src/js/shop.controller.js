@@ -7,6 +7,7 @@
     let vm = this;
     vm.sortBy = null;
     vm.items = ShopService.getItem();
+    console.log(vm.items);
     vm.tax = 0.0575;
     vm.itemPrice = function itemPrice(item){
       let discountPrice = item.price - item.discount;
